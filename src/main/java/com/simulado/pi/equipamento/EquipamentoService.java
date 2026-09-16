@@ -9,7 +9,7 @@ import java.util.HashMap;
 @Service
 public class EquipamentoService {
 
-    HashMap<String, Equipamento> equipamentos = new HashMap<>();
+    private HashMap<String, Equipamento> equipamentos = new HashMap<>();
 
     public Equipamento create(Equipamento equipamento){
         equipamentos.put(equipamento.getCodigoPatrimonio(), equipamento);

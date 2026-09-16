@@ -53,4 +53,11 @@ public class Equipamento {
             this.deleted = false;
         }
     }
+
+    public Boolean getDisponivel(){
+        return this.disponivel;
+    }
+    public void setDisponivel(){
+        this.disponivel = true;
+    }
 }

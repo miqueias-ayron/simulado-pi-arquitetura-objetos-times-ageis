@@ -1,4 +1,7 @@
 package com.simulado.pi.cliente;
+import com.simulado.pi.locacao.Locacao;
+
+import java.util.ArrayList;
 
 public class Cliente {
 
@@ -7,6 +10,8 @@ public class Cliente {
     private String cpf;
     private String telefone;
     private boolean deleted;
+
+    private ArrayList<Locacao> locacoes;
 
     public Cliente(String email, String nome, String cpf, String telefone){
         this.email = email;
@@ -51,5 +56,10 @@ public class Cliente {
         else{
             this.deleted = false;
         }
+    }
+
+    public void addLocacao(Locacao locacao){
+        locacoes.add(locacao);
+        locacao.setCliente(this);
     }
 }
