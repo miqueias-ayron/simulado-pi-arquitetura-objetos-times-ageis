@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @RestController
 public class ClienteController {
@@ -28,7 +27,7 @@ public class ClienteController {
     @GetMapping("/clientes/{cpf}")
     @ResponseStatus(HttpStatus.OK)
     public Cliente buscaPorCpf(@PathVariable String cpf){
-        return clienteService.readForCpf(cpf);
+        return clienteService.readOne(cpf);
     }
 
     @PutMapping("/clientes/{cpf}")

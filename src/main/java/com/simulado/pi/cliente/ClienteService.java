@@ -10,16 +10,16 @@ public class ClienteService {
 
     private HashMap<String, Cliente> clientes = new HashMap<>();
 
-    public Cliente create(Cliente clienteDTO){
-        clientes.put(clienteDTO.getCpf(), clienteDTO);
-        return clienteDTO;
+    public Cliente create(Cliente cliente){
+        clientes.put(cliente.getCpf(), cliente);
+        return cliente;
     }
 
     public ArrayList<Cliente> readAll(){
         return new ArrayList<>(clientes.values());
     }
 
-    public Cliente readForCpf(String cpf){
+    public Cliente readOne(String cpf){
         Cliente cliente = clientes.get(cpf);
         if (cliente == null){
             return null;
