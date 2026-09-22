@@ -1,5 +1,6 @@
 package com.simulado.pi.cliente;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class ClienteController {
 
     @PostMapping("/clientes")
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente criarClientes(@RequestBody Cliente cliente){
+    public Cliente criarClientes(@Valid @RequestBody Cliente cliente){
         return clienteService.create(cliente);
     }
 
@@ -32,7 +33,7 @@ public class ClienteController {
 
     @PutMapping("/clientes/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente editarCliente(@PathVariable String cpf, @RequestBody Cliente cliente){
+    public Cliente editarCliente(@PathVariable String cpf, @Valid @RequestBody Cliente cliente){
         return clienteService.put(cpf, cliente);
     }
 

@@ -1,5 +1,6 @@
 package com.simulado.pi.usuarios;
 
+import com.simulado.pi.utils.RegistroDuplicadoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,9 @@ public class UsuarioService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public CreateUserDTO create(CreateUserDTO userDTO) {
+        if (usuarios.containsKey(userDTO.getEmail())) {
+            throw new RegistroDuplicadoException("Email já cadastrado");
+        }
 
         userDTO.setSenha(passwordEncoder.encode(userDTO.getSenha()));
 

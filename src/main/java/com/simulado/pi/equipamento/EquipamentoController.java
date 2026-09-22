@@ -1,6 +1,7 @@
 package com.simulado.pi.equipamento;
 
 import com.simulado.pi.cliente.Cliente;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class EquipamentoController {
 
     @PostMapping("/equipamentos")
     @ResponseStatus(HttpStatus.CREATED)
-    public Equipamento criarEquipamentos(@RequestBody Equipamento equipamento){
+    public Equipamento criarEquipamentos(@Valid @RequestBody Equipamento equipamento){
         return equipamentoService.create(equipamento);
     }
 
@@ -32,7 +33,7 @@ public class EquipamentoController {
 
     @PutMapping("/equipamentos/{codigoPatrimonio}")
     @ResponseStatus(HttpStatus.OK)
-    public Equipamento editarEquipamento(@PathVariable String codigoPatrimonio, @RequestBody Equipamento equipamento){
+    public Equipamento editarEquipamento(@PathVariable String codigoPatrimonio, @Valid @RequestBody Equipamento equipamento){
         return equipamentoService.put(codigoPatrimonio, equipamento);
     }
 

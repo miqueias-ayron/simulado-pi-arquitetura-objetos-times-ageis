@@ -1,5 +1,6 @@
 package com.simulado.pi.usuarios;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/usuarios")
-    public CreateUserDTO createUser(@RequestBody CreateUserDTO createUserDTO) {
+    public CreateUserDTO createUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
         return usuarioService
                 .create(createUserDTO);
     }

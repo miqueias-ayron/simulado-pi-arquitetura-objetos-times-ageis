@@ -2,26 +2,30 @@ package com.simulado.pi.locacao;
 
 import com.simulado.pi.cliente.Cliente;
 import com.simulado.pi.equipamento.Equipamento;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Locacao {
     private String id;
+    @NotNull
     private LocalDate dataInicio;
+    @NotNull
     private LocalDate dataFim;
+    @NotNull
     private Cliente cliente;
     private Equipamento equipamento;
-    private boolean deleted;
+    private boolean deleted = false;
 
-    public Locacao(LocalDate dataInicio, LocalDate dataFim, Cliente cliente, Equipamento equipamento){
-        this.id = UUID.randomUUID().toString();
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        this.cliente = cliente;
-        this.equipamento = equipamento;
+    public Locacao(){
     }
 
+    public String getId(){
+        return this.id;
+    }
+    public void setId(String id){
+        this.id = id;
+    }
     public LocalDate getDataInicio() {
         return dataInicio;
     }
@@ -50,13 +54,11 @@ public class Locacao {
         this.equipamento = equipamento;
     }
 
+    public boolean getDeleted(){
+        return this.deleted;
+    }
     public void setDeleted(){
-        if (deleted == false){
-            this.deleted = true;
-        }
-        else{
-            this.deleted = false;
-        }
+        this.deleted = true;
     }
 
 }

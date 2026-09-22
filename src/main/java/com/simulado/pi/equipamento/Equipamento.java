@@ -1,20 +1,21 @@
 package com.simulado.pi.equipamento;
 
-public class Equipamento {
-    private String nome;
-    private String categoria;
-    private double valorDiaria;
-    private String codigoPatrimonio;
-    private boolean disponivel;
-    private boolean deleted;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
-    public Equipamento(String nome, String categoria, double valorDiaria, String codigoPatrimonio){
-        this.nome = nome;
-        this.categoria = categoria;
-        this.valorDiaria = valorDiaria;
-        this.codigoPatrimonio = codigoPatrimonio;
-        this.disponivel = true;
-        this.deleted = false;
+public class Equipamento {
+    @NotBlank
+    private String nome;
+    @NotBlank
+    private String categoria;
+    @Positive
+    private double valorDiaria;
+    @NotBlank
+    private String codigoPatrimonio;
+    private boolean disponivel = true;
+    private boolean deleted = false;
+
+    public Equipamento(){
     }
 
     public String getNome(){
@@ -45,19 +46,17 @@ public class Equipamento {
         this.codigoPatrimonio = codigoPatrimonio;
     }
 
+    public boolean getDeleted(){
+        return this.deleted;
+    }
     public void setDeleted(){
-        if (deleted == false){
-            this.deleted = true;
-        }
-        else{
-            this.deleted = false;
-        }
+        this.deleted = true;
     }
 
     public Boolean getDisponivel(){
         return this.disponivel;
     }
-    public void setDisponivel(){
-        this.disponivel = true;
+    public void setDisponivel(boolean disponivel){
+        this.disponivel = disponivel;
     }
 }

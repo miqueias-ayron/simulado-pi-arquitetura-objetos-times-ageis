@@ -1,24 +1,24 @@
 package com.simulado.pi.cliente;
 import com.simulado.pi.locacao.Locacao;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 
 public class Cliente {
 
+    @NotBlank
     private String email;
+    @NotBlank
     private String nome;
+    @NotBlank
     private String cpf;
+    @NotBlank
     private String telefone;
-    private boolean deleted;
+    private boolean deleted = false;
 
-    private ArrayList<Locacao> locacoes;
+    private ArrayList<Locacao> locacoes = new ArrayList<>();
 
-    public Cliente(String email, String nome, String cpf, String telefone){
-        this.email = email;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.deleted = false;
+    public Cliente(){
     }
 
     public String getNome(){
@@ -49,13 +49,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public boolean getDeleted(){
+        return this.deleted;
+    }
     public void setDeleted(){
-        if (deleted == false){
-            this.deleted = true;
-        }
-        else{
-            this.deleted = false;
-        }
+        this.deleted = true;
     }
 
     public void addLocacao(Locacao locacao){

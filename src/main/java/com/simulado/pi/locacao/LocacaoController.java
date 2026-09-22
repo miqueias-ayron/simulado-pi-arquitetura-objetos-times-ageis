@@ -1,5 +1,6 @@
 package com.simulado.pi.locacao;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ public class LocacaoController {
 
     @PostMapping("/locacoes")
     @ResponseStatus(HttpStatus.CREATED)
-    public Locacao criarLocacao(@RequestBody Locacao locacao){
+    public Locacao criarLocacao(@Valid @RequestBody Locacao locacao){
         return locacaoService.create(locacao);
     }
 
@@ -31,7 +32,7 @@ public class LocacaoController {
 
     @PutMapping("/locacoes/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Locacao editarLocacao(@PathVariable String id, @RequestBody Locacao locacao){
+    public Locacao editarLocacao(@PathVariable String id, @Valid @RequestBody Locacao locacao){
         return locacaoService.put(id, locacao);
     }
 

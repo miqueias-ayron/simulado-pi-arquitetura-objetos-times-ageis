@@ -1,6 +1,6 @@
 package com.simulado.pi.equipamento;
 
-import com.simulado.pi.cliente.Cliente;
+import com.simulado.pi.utils.RegistroDuplicadoException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,27 +12,33 @@ public class EquipamentoService {
     private HashMap<String, Equipamento> equipamentos = new HashMap<>();
 
     public Equipamento create(Equipamento equipamento){
+        if (equipamentos.containsKey(equipamento.getCodigoPatrimonio())){
+            throw new RegistroDuplicadoException("Código de patrimônio já cadastrado");
+        }
         equipamentos.put(equipamento.getCodigoPatrimonio(), equipamento);
         return equipamento;
     }
 
     public ArrayList<Equipamento> readAll(){
-        return new ArrayList<>(equipamentos.values());
+        ArrayList<Equipamento> resultado = new ArrayList<>();
+        for (Equipamento equipamento : equipamentos.values()){
+            if (!equipamento.getDeleted()){
+                resultado.add(equipamento);
+            }
+        }
+        return resultado;
     }
 
     public Equipamento readOne(String codigoPatrimonio){
         Equipamento equipamento = equipamentos.get(codigoPatrimonio);
-        if (equipamento == null){
-            return null;
+        if (equipamento == null || equipamento.getDeleted()){
+            throw new EquipamentoNaoEncontradoException("Equipamento não encontrado");
         }
         return equipamento;
     }
 
     public Equipamento put(String codigoPatrimonio, Equipamento equipamento) {
-        Equipamento e = equipamentos.get(codigoPatrimonio);
-        if (e == null) {
-            return null;
-        }
+        Equipamento e = readOne(codigoPatrimonio);
         e.setNome(equipamento.getNome());
         e.setCategoria(equipamento.getCategoria());
         e.setValorDiaria(equipamento.getValorDiaria());
@@ -41,11 +47,8 @@ public class EquipamentoService {
     }
 
     public Equipamento delete(String codigoPatrimonio){
-        Equipamento equipamento = equipamentos.get(codigoPatrimonio);
-        if (equipamento != null){
-            equipamento.setDeleted();
-        }
+        Equipamento equipamento = readOne(codigoPatrimonio);
+        equipamento.setDeleted();
         return equipamento;
-
     }
 }
